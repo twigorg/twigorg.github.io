@@ -61,7 +61,7 @@
        application. For more information, see:
        https://developers.google.com/web/fundamentals/primers/service-workers -->
   <script>
-    var serviceWorkerVersion = '149385924';
+    var serviceWorkerVersion = '1465845022';
     var scriptLoaded = false;
     function loadMainDartJs() {
       if (scriptLoaded) {
@@ -78,7 +78,7 @@
       // Service workers are supported. Use them.
       window.addEventListener('load', function () {
         // Register firebase-messaging service worker.
-        navigator.serviceWorker.register("web/firebase-messaging-sw.js");
+        navigator.serviceWorker.register("firebase-messaging-sw.js");
 
         // Wait for registration to finish before dropping the <script> tag.
         // Otherwise, the browser will load the script multiple times,
@@ -89,7 +89,6 @@
             function waitForActivation(serviceWorker) {
               serviceWorker.addEventListener('statechange', () => {
                 if (serviceWorker.state == 'activated') {
-                  console.log('Installed new service worker.');
                   loadMainDartJs();
                 }
               });
@@ -101,12 +100,10 @@
             } else if (!reg.active.scriptURL.endsWith(serviceWorkerVersion)) {
               // When the app updates the serviceWorkerVersion changes, so we
               // need to ask the service worker to update.
-              console.log('New service worker available.');
               reg.update();
               waitForActivation(reg.installing);
             } else {
               // Existing service worker is still good.
-              console.log('Loading app from service worker.');
               loadMainDartJs();
             }
           });
