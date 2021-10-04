@@ -11,4 +11,7 @@ firebase.initializeApp({
   measurementId: "G-XCDX0WFHBH"
 });
 // Necessary to receive background messages:
-const messaging = firebase.messaging();
+let messaging = null;
+if (firebase.messaging.isSupported()) {
+  messaging = firebase.messaging();
+}
